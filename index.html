@@ -318,6 +318,27 @@ After initially registering your SMART app, it can take up to 10 minutes for you
   Loading...
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'./lib/fhir-client-v0.1.11.js'</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <script src='./lib/es6-shim-0.35.1.min.js'></script>
+<script src='./src/js/example-smart-app.js'></script>
+<script src='./lib/fhir-client-v0.1.11.js'></script>
+
+<!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
+<!-- https://github.com/cerner/fhir-client-cerner-additions -->
+<script src='./lib/fhir-client-cerner-additions-1.0.0.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  extractData().then(
+    //Display Patient Demographics and Observations if extractData was success
+    function(p) {
+      drawVisualization(p);
+    },
+
+    //Display 'Failed to call FHIR Service' if extractData failed
+    function() {
+      $('#errors').html('<p> Failed to call FHIR Service </p>');
+    }
+  );
+</script>
     <span class="c">&lt;!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API --&gt;</span>
     <span class="c">&lt;!-- https://github.com/cerner/fhir-client-cerner-additions --&gt;</span>
     <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'./lib/fhir-client-cerner-additions-1.0.0.js'</span><span class="nt">&gt;&lt;/script&gt;</span>
